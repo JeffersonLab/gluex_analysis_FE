@@ -741,6 +741,11 @@ function RemoveSelector(level,parent)
                     {
                         USTR=flagparts[1]
                     }
+                    else if(flagparts[0]=="S")
+                    {
+                        
+                        SSTR=FlagsArray[j].split("S")[1]
+                    }
                 }
 
             }
@@ -753,7 +758,7 @@ function RemoveSelector(level,parent)
                 
             }
         }
-        var jsonOBJ={Name: blame,Reaction: ReactionSTR, Decays: DecayArray, B: BSTR, F: FSTR, T:TSTR, U:USTR, Marray: MassConstrain}
+        var jsonOBJ={Name: blame,Reaction: ReactionSTR, Decays: DecayArray, B: BSTR, F: FSTR,S:SSTR, T:TSTR, U:USTR, Marray: MassConstrain}
 
         var JSONSTR=JSON.stringify(jsonOBJ);
         console.log(jsonOBJ)

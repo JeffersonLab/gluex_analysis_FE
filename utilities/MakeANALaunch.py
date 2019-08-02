@@ -94,8 +94,10 @@ def WriteLinesToFile(ReactionNum,jobj,configF):
         flagstr+="F"+jobj["F"]+"_"
     if(jobj["T"] != "3"):
         flagstr+="T"+jobj["T"]+"_"
-    if(jobj["S"] != "999"):
-        flagstr+="S"+jobj["S"]+"_"
+    
+    if("S" in jobj):
+        if(jobj["S"] != "999"):
+            flagstr+="S"+jobj["S"]+"_"
     if(jobj["U"] != "0"):
         flagstr+="U"+jobj["U"]+"_"
     
