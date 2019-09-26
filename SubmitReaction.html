@@ -21,7 +21,7 @@ Each product comes as a set of three objects:<br>
 <br>
 <br>
 <div id="GlobalFlags">
-B (Beam Bunches):<input id="BFlag" type="number" min="0" max="5" value="1" onchange="MakeConfigLines()">&emsp;T (Extra Charged Tracks):<input id="TFlag" type="number" min="0" max="10" value="3" onchange="MakeConfigLines()">&emsp;F (Fit Type):<select id="FFlag" onchange="MakeConfigLines()">
+B (Beam Bunches):<input id="BFlag" type="number" min="0" max="5" value="1" onchange="MakeConfigLines()">&emsp;T (Extra Charged Tracks):<input id="TFlag" type="number" min="0" max="10" value="3" onchange="MakeConfigLines()">&emsp; S (Extra Showers):<input id="SFlag" type="number" min="0" max="999" value="999" onchange="MakeConfigLines()">&emsp;F (Fit Type):<select id="FFlag" onchange="MakeConfigLines()">
     <option value=0 >None</option>
     <option value=1 >P4 </option>
     <option value=2>Vertex</option>
@@ -537,8 +537,9 @@ function RemoveSelector(level,parent)
         var BFlag_val=document.getElementById("BFlag").value
         var FFlag_val=document.getElementById("FFlag").value
         var TFlag_val=document.getElementById("TFlag").value
+        var SFlag_val=document.getElementById("SFlag").value
 
-        if(BFlag_val != "1" || FFlag_val != "4" || TFlag_val != "3" || document.getElementById("UFlag").checked || MassConstrain.length!=0)
+        if(BFlag_val != "1" || FFlag_val != "4" || TFlag_val != "3" || SFlag_val != "999" || document.getElementById("UFlag").checked || MassConstrain.length!=0)
         {
             ConfigLines+="Reaction1"+":Flags "
             if(BFlag_val != "1")
@@ -561,7 +562,15 @@ function RemoveSelector(level,parent)
             {
                 ConfigLines+="T"+TFlag_val;
             }
-            if((BFlag_val != "1" || FFlag_val != "4" || TFlag_val != "3") && document.getElementById("UFlag").checked)
+            if((BFlag_val != "1" || FFlag_val != "4" || TFlag_val != "3") && SFlag_val != "999")
+            {
+                ConfigLines+="_"
+            }
+            if(SFlag_val != "999")
+            {
+                ConfigLines+="S"+SFlag_val;
+            }
+            if((BFlag_val != "1" || FFlag_val != "4" || TFlag_val != "3" || SFlag_val != "999") && document.getElementById("UFlag").checked)
             {
                 ConfigLines+="_"
             }
@@ -569,7 +578,7 @@ function RemoveSelector(level,parent)
             {
                 ConfigLines+="U1"
             }
-            if((BFlag_val != "1" || FFlag_val != "4" || TFlag_val != "3" || document.getElementById("UFlag").checked) && MassConstrain.length!=0)
+            if((BFlag_val != "1" || FFlag_val != "4" || TFlag_val != "3" || SFlag_val != "999" || document.getElementById("UFlag").checked) && MassConstrain.length!=0)
             {
                 ConfigLines+="_"
             }
@@ -732,6 +741,11 @@ function RemoveSelector(level,parent)
                     {
                         USTR=flagparts[1]
                     }
+                    else if(flagparts[0]=="S")
+                    {
+                        
+                        SSTR=FlagsArray[j].split("S")[1]
+                    }
                 }
 
             }
@@ -744,7 +758,7 @@ function RemoveSelector(level,parent)
                 
             }
         }
-        var jsonOBJ={Name: blame,Reaction: ReactionSTR, Decays: DecayArray, B: BSTR, F: FSTR, T:TSTR, U:USTR, Marray: MassConstrain}
+        var jsonOBJ={Name: blame,Reaction: ReactionSTR, Decays: DecayArray, B: BSTR, F: FSTR,S:SSTR, T:TSTR, U:USTR, Marray: MassConstrain}
 
         var JSONSTR=JSON.stringify(jsonOBJ);
         console.log(jsonOBJ)
