@@ -52,6 +52,8 @@ Initial Particles -----> Final State Particles <input type="button" id="addDecay
     <select id="dataSet" onchange="UpdatePreview()">
         <option value="2017-01_ver03" selected >2017-01_ver03</option>
         <option value="2018-01_ver02" >2018-01_ver02</option>
+        <option value="2018-08_ver02" >2018-08_ver02</option>
+        <option value="2017-01_bggen" >2017-01_bggen</option>
     </select>
 </font></b>
 <br>
@@ -121,18 +123,18 @@ Initial Particles -----> Final State Particles <input type="button" id="addDecay
     // PartArray.push({Particle:'He3', geantID: 49 , pdgID: 49, sortID: 1049}); -->
     // PartArray.push({Particle:'Pb208', geantID: 111 , pdgID: 1000822080, sortID: 1111}); -->
 
-    PartArray.push({Particle:'J/Ψ', geantID: 83, pdgID: 443, sortID: 83});
-    // PartArray.push({Particle:'eta_c', geantID: 84, pdgID: 441, sortID: 84}); -->
-    // PartArray.push({Particle:'chi_c0', geantID: 85, pdgID: 10441, sortID: 85}); -->
-    // PartArray.push({Particle:'chi_c1', geantID: 86, pdgID: 20443, sortID: 86}); -->
-    // PartArray.push({Particle:'chi_c2', geantID: 87, pdgID: 445, sortID: 87}); -->
+    PartArray.push({Particle:'J/Ψ', geantID: 183, pdgID: 443, sortID: 183});
+    // PartArray.push({Particle:'eta_c', geantID: 184, pdgID: 441, sortID: 184}); -->
+    // PartArray.push({Particle:'chi_c0', geantID: 185, pdgID: 10441, sortID: 185}); -->
+    // PartArray.push({Particle:'chi_c1', geantID: 186, pdgID: 20443, sortID: 186}); -->
+    // PartArray.push({Particle:'chi_c2', geantID: 187, pdgID: 445, sortID: 187}); -->
 
-    PartArray.push({Particle:'D0', geantID: 89, pdgID: 421, sortID: 89});
-    PartArray.push({Particle:'D+', geantID: 90, pdgID: 411, sortID: 90});
-    PartArray.push({Particle:'D*0', geantID: 91, pdgID: 423, sortID: 91});
-    PartArray.push({Particle:'D*+', geantID: 92, pdgID: 413, sortID: 92});
-    PartArray.push({Particle:'Λc', geantID: 93, pdgID: 4122, sortID: 93});
-    PartArray.push({Particle:'D0 bar', geantID: 94, pdgID: -421, sortID: 94});
+    PartArray.push({Particle:'D0', geantID: 189, pdgID: 421, sortID: 189});
+    PartArray.push({Particle:'D+', geantID: 190, pdgID: 411, sortID: 190});
+    PartArray.push({Particle:'D*0', geantID: 191, pdgID: 423, sortID: 191});
+    PartArray.push({Particle:'D*+', geantID: 192, pdgID: 413, sortID: 192});
+    PartArray.push({Particle:'Λc', geantID: 193, pdgID: 4122, sortID: 193});
+    PartArray.push({Particle:'D0 bar', geantID: 194, pdgID: -421, sortID: 194});
 
 
     var DefDecayArray=[];
@@ -140,9 +142,9 @@ Initial Particles -----> Final State Particles <input type="button" id="addDecay
      DefDecayArray.push({Parent:16, Decay: "16__8_9"});
      DefDecayArray.push({Parent:17, Decay: "17__1_1"});
      DefDecayArray.push({Parent:35, Decay: "35__8_9_17"});
-     DefDecayArray.push({Parent:89, Decay: "89__8_12"});
-     DefDecayArray.push({Parent:94, Decay: "94__9_11"});
-     DefDecayArray.push({Parent:89, Decay: "89__2_3"});
+     DefDecayArray.push({Parent:189, Decay: "189__8_12"});
+     DefDecayArray.push({Parent:194, Decay: "194__9_11"});
+     DefDecayArray.push({Parent:183, Decay: "183__2_3"});
 
      DefDecayArray.push({Parent:18, Decay: "18__9_14"});
      DefDecayArray.push({Parent:26, Decay: "26__8_15"});
@@ -152,7 +154,7 @@ Initial Particles -----> Final State Particles <input type="button" id="addDecay
      DefDecayArray.push({Parent:22, Decay: "22__7_18"});
      DefDecayArray.push({Parent:23, Decay: "23__9_18"});
      DefDecayArray.push({Parent:24, Decay: "24__12_18"});
-     DefDecayArray.push({Parent:93, Decay: "93__8_12_14"});
+     DefDecayArray.push({Parent:193, Decay: "193__8_12_14"});
 
     $(document).ready(function(){populateParticleSelector("iPart1_0",true);populateParticleSelector("iPart2_0",true);MakeConfigLines();GetCurrentConfigFile();});
     function populateParticleSelector(id,trunc)
@@ -709,6 +711,7 @@ function RemoveSelector(level,parent)
         var FSTR="4";
         var TSTR="3";
         var USTR="0";
+        var SSTR="999";
         for(var i=0;i<AllLines.length;i++)
         {
             var splitLine=AllLines[i].split(" ");
@@ -743,7 +746,6 @@ function RemoveSelector(level,parent)
                     }
                     else if(flagparts[0]=="S")
                     {
-                        
                         SSTR=FlagsArray[j].split("S")[1]
                     }
                 }
@@ -758,7 +760,7 @@ function RemoveSelector(level,parent)
                 
             }
         }
-        var jsonOBJ={Name: blame,Reaction: ReactionSTR, Decays: DecayArray, B: BSTR, F: FSTR,S:SSTR, T:TSTR, U:USTR, Marray: MassConstrain}
+        var jsonOBJ={Name: blame,Reaction: ReactionSTR, Decays: DecayArray, B: BSTR, F: FSTR, S:SSTR, T:TSTR, U:USTR, Marray: MassConstrain}
 
         var JSONSTR=JSON.stringify(jsonOBJ);
         console.log(jsonOBJ)
